@@ -33,7 +33,7 @@
 
 
                  <li>
-                     <a href="admin">Admin</a>
+                     <a href="admin/admin.php">Admin</a>
                  </li>
                  <!-- <li>
                      <a href="#">Services</a>
