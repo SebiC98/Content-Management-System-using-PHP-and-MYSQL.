@@ -46,6 +46,15 @@
                                     <input class="btn btn-primary" type="submit" name="submit" value="Add Category">
                                 </div>
                             </form>
+                            <?php
+
+                            if (isset($_GET['edit'])) {
+
+                                $categoryId = $_GET['edit'];
+                                include "includes/updateCategories.php";
+                              }
+
+                            ?>
                         </div>
                         <div class="col-xs-6">
                             <table class="table table-bordered table-hover">
@@ -68,11 +77,16 @@
                                         echo "<td>{$categoryId}</td>";
                                         echo "<td>{$categoryTitle}</td>";
                                         echo "<td><a href='categories.php?delete={$categoryId}'>Delete</a></td>";
+                                        echo "<td><a href='categories.php?edit={$categoryId}'>Edit</a></td>";
+
                                         echo "</tr>";
                                     }
                                     ?>
 
                                     <?php
+
+                                    //DELETE QUERY
+
                                     if (isset($_GET['delete'])) {
                                         $theCategoryId = $_GET['delete'];
                                         $query = "DELETE FROM categories WHERE categoryId = {$theCategoryId}";
@@ -94,5 +108,4 @@
 
         </div>
         <!-- /#page-wrapper -->
-
         <?php include "includes/adminFooter.php"; ?>
