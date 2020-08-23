@@ -20,8 +20,25 @@
                             <small>Subheading</small>
                         </h1>
                         <div class="col-xs-6">
+                            <?php
+                            if (isset($_POST['submit'])){
+                                $categoryTitle = $_POST['catTitle'];
 
-                            <form action="">
+                                if($categoryTitle == "" || empty($categoryTitle)){
+                                    echo "This field should not be empty!";
+                                }else{
+                                    $query = "INSERT INTO categories(categoryTitle) ";
+                                    $query .="VALUE('{$categoryTitle}')";
+
+                                    $createCategoryQuery = mysqli_query($connection, $query);
+
+                                    if(!$createCategoryQuery){
+                                        die("QUERY FAILED!".mysqli_error($connection));
+                                    }
+                                }
+                            }
+                            ?>
+                            <form action="" method="post">
                                 <div class="form-group">
                                     <label for="catTitle">Add Category</label>
                                     <input type="text" class="form-control" name="catTitle">
@@ -33,8 +50,8 @@
                         </div>
                         <div class="col-xs-6">
                             <?php
-                            $query = "SELECT * FROM categories";
-                            $selectCategories = mysqli_query($connection, $query);
+                        $query = "SELECT * FROM categories";
+                        $selectCategories = mysqli_query($connection, $query);
                             ?>
                             <table class="table table-bordered table-hover">
                                 <thead>
