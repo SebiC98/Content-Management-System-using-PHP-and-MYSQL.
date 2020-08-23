@@ -20,23 +20,9 @@
                             <small>Subheading</small>
                         </h1>
                         <div class="col-xs-6">
-                            <?php
-                            if (isset($_POST['submit'])) {
-                                $categoryTitle = $_POST['catTitle'];
-                                if ($categoryTitle == "" || empty($categoryTitle)) {
-                                    echo "This field should not be empty!";
-                                } else {
-                                    $query = "INSERT INTO categories(categoryTitle) ";
-                                    $query .= "VALUE('{$categoryTitle}')";
 
-                                    $createCategoryQuery = mysqli_query($connection, $query);
+                            <?php insertCategories(); ?>
 
-                                    if (!$createCategoryQuery) {
-                                        die("QUERY FAILED!" . mysqli_error($connection));
-                                    }
-                                }
-                            }
-                            ?>
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label for="catTitle">Add Category</label>
@@ -46,15 +32,9 @@
                                     <input class="btn btn-primary" type="submit" name="submit" value="Add Category">
                                 </div>
                             </form>
-                            <?php
 
-                            if (isset($_GET['edit'])) {
+                            <?php updateAndInclude();  ?>
 
-                                $categoryId = $_GET['edit'];
-                                include "includes/updateCategories.php";
-                              }
-
-                            ?>
                         </div>
                         <div class="col-xs-6">
                             <table class="table table-bordered table-hover">
@@ -66,34 +46,9 @@
                                 </thead>
                                 <tbody>
 
-                                    <?php //FIND ALL CATEGORIES QUERY
-                                    $query = "SELECT * FROM categories";
-                                    $selectCategories = mysqli_query($connection, $query);
+                                    <?php findAllCategories(); ?>
 
-                                    while ($row = mysqli_fetch_assoc($selectCategories)) {
-                                        $categoryId = $row['categoryId'];
-                                        $categoryTitle = $row['categoryTitle'];
-                                        echo "<tr>";
-                                        echo "<td>{$categoryId}</td>";
-                                        echo "<td>{$categoryTitle}</td>";
-                                        echo "<td><a href='categories.php?delete={$categoryId}'>Delete</a></td>";
-                                        echo "<td><a href='categories.php?edit={$categoryId}'>Edit</a></td>";
-
-                                        echo "</tr>";
-                                    }
-                                    ?>
-
-                                    <?php
-
-                                    //DELETE QUERY
-
-                                    if (isset($_GET['delete'])) {
-                                        $theCategoryId = $_GET['delete'];
-                                        $query = "DELETE FROM categories WHERE categoryId = {$theCategoryId}";
-                                        $deleteQuery = mysqli_query($connection, $query);
-                                        header("Location: categories.php");
-                                    }
-                                    ?>
+                                    <?php deleteCategories(); ?>
 
                                 </tbody>
                             </table>

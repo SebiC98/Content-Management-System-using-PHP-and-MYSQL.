@@ -5,6 +5,7 @@
         <?php
 
         if (isset($_GET['edit'])) {
+            global $connection;
             $categoryId = $_GET['edit'];
             $query = "SELECT * FROM categories WHERE categoryId = $categoryId";
             $selectCategoriesId = mysqli_query($connection, $query);
