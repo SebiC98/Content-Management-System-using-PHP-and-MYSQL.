@@ -21,19 +21,18 @@
                         </h1>
                         <div class="col-xs-6">
                             <?php
-                            if (isset($_POST['submit'])){
+                            if (isset($_POST['submit'])) {
                                 $categoryTitle = $_POST['catTitle'];
-
-                                if($categoryTitle == "" || empty($categoryTitle)){
+                                if ($categoryTitle == "" || empty($categoryTitle)) {
                                     echo "This field should not be empty!";
-                                }else{
+                                } else {
                                     $query = "INSERT INTO categories(categoryTitle) ";
-                                    $query .="VALUE('{$categoryTitle}')";
+                                    $query .= "VALUE('{$categoryTitle}')";
 
                                     $createCategoryQuery = mysqli_query($connection, $query);
 
-                                    if(!$createCategoryQuery){
-                                        die("QUERY FAILED!".mysqli_error($connection));
+                                    if (!$createCategoryQuery) {
+                                        die("QUERY FAILED!" . mysqli_error($connection));
                                     }
                                 }
                             }
@@ -49,10 +48,6 @@
                             </form>
                         </div>
                         <div class="col-xs-6">
-                            <?php
-                        $query = "SELECT * FROM categories";
-                        $selectCategories = mysqli_query($connection, $query);
-                            ?>
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -61,13 +56,31 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
+
+                                    <?php //FIND ALL CATEGORIES QUERY
+                                    $query = "SELECT * FROM categories";
+                                    $selectCategories = mysqli_query($connection, $query);
+
                                     while ($row = mysqli_fetch_assoc($selectCategories)) {
                                         $categoryId = $row['categoryId'];
                                         $categoryTitle = $row['categoryTitle'];
-                                        echo "<tr><td>{$categoryId}</td>";
-                                        echo "<td>{$categoryTitle}</td></tr>";
-                                    } ?>
+                                        echo "<tr>";
+                                        echo "<td>{$categoryId}</td>";
+                                        echo "<td>{$categoryTitle}</td>";
+                                        echo "<td><a href='categories.php?delete={$categoryId}'>Delete</a></td>";
+                                        echo "</tr>";
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if (isset($_GET['delete'])) {
+                                        $theCategoryId = $_GET['delete'];
+                                        $query = "DELETE FROM categories WHERE categoryId = {$theCategoryId}";
+                                        $deleteQuery = mysqli_query($connection, $query);
+                                        header("Location: categories.php");
+                                    }
+                                    ?>
+
                                 </tbody>
                             </table>
 
