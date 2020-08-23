@@ -1,11 +1,11 @@
-<?php include "includes/header.php"; ?>
+<?php include "includes/adminHeader.php"; ?>
 
 <body>
 
     <div id="wrapper">
 
         <!-- Navigation -->
-        <?php include "includes/navigation.php"; ?>
+        <?php include "includes/adminNavigation.php"; ?>
 
 
         <div id="page-wrapper">
@@ -32,7 +32,10 @@
                             </form>
                         </div>
                         <div class="col-xs-6">
-
+                            <?php
+                            $query = "SELECT * FROM categories";
+                            $selectCategories = mysqli_query($connection, $query);
+                            ?>
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -41,14 +44,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Test1</td>
-                                        <td>Test2</td>
-                                    <tr>
-                                        <td>Test3</td>
-                                        <td>Test4</td>
-                                    </tr>
-                                    </tr>
+                                    <?php
+                                    while ($row = mysqli_fetch_assoc($selectCategories)) {
+                                        $categoryId = $row['categoryId'];
+                                        $categoryTitle = $row['categoryTitle'];
+                                        echo "<tr><td>{$categoryId}</td>";
+                                        echo "<td>{$categoryTitle}</td></tr>";
+                                    } ?>
                                 </tbody>
                             </table>
 
@@ -63,4 +65,4 @@
         </div>
         <!-- /#page-wrapper -->
 
-        <?php include "includes/footer.php"; ?>
+        <?php include "includes/adminFooter.php"; ?>
