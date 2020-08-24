@@ -20,7 +20,7 @@
                     $postAuthor = $row['postAuthor'];
                     $postDate = $row['postDate'];
                     $postImage = $row['postImage'];
-                    $postContent = $row['postContent'];
+                    $postContent = substr($row['postContent'],0,300);
                 ?>
                  <h1 class="page-header">
                      Page Heading
