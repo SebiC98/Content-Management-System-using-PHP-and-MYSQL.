@@ -43,7 +43,7 @@
             }
 
             echo "<td>{$categoryTitle}</td>";
-           
+        
             echo "<td>$postTitle</td>";
             echo "<td>$postAuthor</td>";
             echo "<td>$postDate</td>";
