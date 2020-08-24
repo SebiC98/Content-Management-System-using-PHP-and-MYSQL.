@@ -34,7 +34,16 @@
 
             echo "<tr>";
             echo "<td>$postId</td>";
-            echo "<td>$postCategoryId</td>";
+
+            $query = "SELECT * FROM categories WHERE categoryId = $postCategoryId";
+            $selectCategoriesId = mysqli_query($connection, $query);
+            confirmQuery($selectCategoriesId);
+            while ($row = mysqli_fetch_assoc($selectCategoriesId)) {
+                $categoryTitle = $row['categoryTitle'];
+            }
+
+            echo "<td>{$categoryTitle}</td>";
+           
             echo "<td>$postTitle</td>";
             echo "<td>$postAuthor</td>";
             echo "<td>$postDate</td>";
