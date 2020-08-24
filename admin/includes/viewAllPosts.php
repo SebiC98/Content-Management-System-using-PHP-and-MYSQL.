@@ -43,6 +43,7 @@
             echo "<td>$postTags</td>";
             echo "<td>$postCommentCount</td>";
             echo "<td>$postStatus</td>";
+            echo "<td><a href='posts.php?delete={$postId}'>Delete</a></td>";
             echo "</tr>";
         }
 
@@ -54,3 +55,19 @@
 
     </tbody>
 </table>
+
+<?php
+
+if (isset($_GET['delete'])) {
+
+    $thePostId = $_GET['delete'];
+
+    $query = "DELETE FROM posts WHERE postId = {$thePostId} ";
+    $deleteQuery = mysqli_query($connection, $query);
+
+    confirmQuery($deleteQuery);
+    header("Location: posts.php");
+}
+
+
+?>
