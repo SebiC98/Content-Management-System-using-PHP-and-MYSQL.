@@ -43,6 +43,7 @@
             echo "<td>$postTags</td>";
             echo "<td>$postCommentCount</td>";
             echo "<td>$postStatus</td>";
+            echo "<td><a href='posts.php?source=editPost&pId={$postId}'>Edit</a></td>";
             echo "<td><a href='posts.php?delete={$postId}'>Delete</a></td>";
             echo "</tr>";
         }
