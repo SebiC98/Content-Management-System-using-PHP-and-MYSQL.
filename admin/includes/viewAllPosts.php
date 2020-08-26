@@ -11,6 +11,8 @@
             <th>Tags</th>
             <th>Comments</th>
             <th>Status</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
 
@@ -27,7 +29,7 @@
             $postAuthor = $row['postAuthor'];
             $postDate = $row['postDate'];
             $postImage = $row['postImage'];
-            $postContent = $row['postContent'];
+            $postContent = substr($row['postContent'], 0, 100 );
             $postTags = $row['postTags'];
             $postCommentCount = $row['postCommentCount'];
             $postStatus = $row['postStatus'];

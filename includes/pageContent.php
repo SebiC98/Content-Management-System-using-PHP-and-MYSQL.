@@ -15,27 +15,33 @@
                     $postDate = $row['postDate'];
                     $postImage = $row['postImage'];
                     $postContent = substr($row['postContent'], 0, 300);
-                ?>
-                 <h1 class="page-header">
-                     Page Heading
-                     <small>Secondary Text</small>
-                 </h1>
+                    $postStatus = $row['postStatus'];
 
-                 <!-- First Blog Post -->
-                 <h2>
-                     <a href="post.php?pId=<?php echo $postId;?>"><?php echo $postTitle; ?></a>
-                 </h2>
-                 <p class="lead">
-                     by <a href="index.php"><?php echo $postAuthor; ?></a>
-                 </p>
-                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate; ?></p>
-                 <hr>
-                 <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
-                 <hr>
-                 <p><?php echo $postContent; ?></p>
-                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                 <hr>
+                    if ($postStatus !== 'published') {
+                        echo "<h1 class='text-center' >Post no published yet</h1>";
+                    } else {
+                ?>
+                     <h1 class="page-header">
+                         Page Heading
+                         <small>Secondary Text</small>
+                     </h1>
+
+                     <!-- First Blog Post -->
+                     <h2>
+                         <a href="post.php?pId=<?php echo $postId; ?>"><?php echo $postTitle; ?></a>
+                     </h2>
+                     <p class="lead">
+                         by <a href="index.php"><?php echo $postAuthor; ?></a>
+                     </p>
+                     <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate; ?></p>
+                     <hr>
+                     <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
+                     <hr>
+                     <p><?php echo $postContent; ?></p>
+                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                     <hr>
              <?php
+                    }
                 }
                 ?>
              <!-- Blog Comments -->

@@ -53,17 +53,17 @@
             while ($row = mysqli_fetch_assoc($selectPostIdQuery)) {
                 $postId = $row['postId'];
                 $postTitle = $row['postTitle'];
-                
+
                 echo "<td><a href='../post.php?pId=$postId'>$postTitle</a></td>";
             }
-            
+
 
 
             echo "<td>$commentDate</td>";
 
             echo "<td><a href='comments.php?approve=$commentId'>Approve</a></td>";
             echo "<td><a href='comments.php?unapprove=$commentId'>Unapprove</a></td>";
-            echo "<td><a href='comments.php?delete=$commentId'>Delete</a></td>";
+            echo "<td><a href='comments.php?delete=$commentId&delete2=$commentPostId'>Delete</a></td>";
             echo "</tr>";
         }
 
@@ -81,7 +81,7 @@ if (isset($_GET['approve'])) {
 
     $theCommentId = $_GET['approve'];
 
-    $query = "UPDATE comments SET commentStatus = 'approve' WHERE commentId = '$theCommentId' ";
+    $query = "UPDATE comments SET commentStatus = 'approved' WHERE commentId = '$theCommentId' ";
     $approveCommentQuery = mysqli_query($connection, $query);
     confirmQuery($approveCommentQuery);
     header("Location: comments.php");
@@ -91,21 +91,30 @@ if (isset($_GET['unapprove'])) {
 
     $theCommentId = $_GET['unapprove'];
 
-    $query = "UPDATE comments SET commentStatus = 'unapprove' WHERE commentId = '$theCommentId' ";
+    $query = "UPDATE comments SET commentStatus = 'unapproved' WHERE commentId = '$commentPostId' ";
     $unapproveCommentQuery = mysqli_query($connection, $query);
     confirmQuery($unapproveCommentQuery);
     header("Location: comments.php");
 }
 
 
-if (isset($_GET['delete'])) {
+if (isset($_GET['delete']) && isset($_GET['delete2'])) {
 
+    $theCommentPostId =$_GET['delete2'];
     $theCommentId = $_GET['delete'];
+    $query = "DELETE FROM comments WHERE commentId = {$theCommentId}";
 
-    $query = "DELETE FROM comments WHERE commentId = {$theCommentId} ";
     $deleteQuery = mysqli_query($connection, $query);
 
     confirmQuery($deleteQuery);
+
+    
+    $query = "UPDATE posts SET postCommentCount = postCommentCount - 1 WHERE postId = $theCommentPostId";
+
+    $deleteCommentCountQuery = mysqli_query($connection, $query);
+
+    confirmQuery($deleteCommentCountQuery);
+
     header("Location: comments.php");
 }
 
