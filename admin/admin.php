@@ -186,9 +186,8 @@ if (!isset($_SESSION['role'])) {
 
                             <?php
 
-                            $elementText = ['Active Posts', 'Draft Posts', 'Comments','Unapproved Comments', 'Users', 'Subscribers', 'Categories'];
+                            $elementText = ['Active Posts', 'Draft Posts', 'Comments', 'Unapproved Comments', 'Users', 'Subscribers', 'Categories'];
                             $elementCount = [$postCounts, $postDraftCounts, $commentCounts, $commentsUnapproveCounts, $countUsers, $usersSubscriberCounts, $countCategories];
-
                             for ($i = 0; $i < 7; $i++) {
 
                                 echo "['{$elementText[$i]}'" . "," . "{$elementCount[$i]}],";
@@ -204,6 +203,7 @@ if (!isset($_SESSION['role'])) {
                             chart: {
                                 title: '',
                                 subtitle: '',
+                                
                             }
                         };
 
