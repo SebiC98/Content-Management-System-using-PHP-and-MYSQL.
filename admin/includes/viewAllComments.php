@@ -91,7 +91,7 @@ if (isset($_GET['unapprove'])) {
 
     $theCommentId = $_GET['unapprove'];
 
-    $query = "UPDATE comments SET commentStatus = 'unapproved' WHERE commentId = '$commentPostId' ";
+    $query = "UPDATE comments SET commentStatus = 'unapproved' WHERE commentId = '$theCommentId' ";
     $unapproveCommentQuery = mysqli_query($connection, $query);
     confirmQuery($unapproveCommentQuery);
     header("Location: comments.php");
