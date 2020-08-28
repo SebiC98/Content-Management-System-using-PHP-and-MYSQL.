@@ -17,9 +17,7 @@
                     $postContent = substr($row['postContent'], 0, 300);
                     $postStatus = $row['postStatus'];
 
-                    if ($postStatus !== 'published') {
-                        echo "<h1 class='text-center' >Post no published yet</h1>";
-                    } else {
+                    if ($postStatus == 'published') {
                 ?>
                      <h1 class="page-header">
                          Page Heading
@@ -35,10 +33,12 @@
                      </p>
                      <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate; ?></p>
                      <hr>
-                     <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
+                     <a href="post.php?pId=<?php echo $postId; ?>">
+                         <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
+                     </a>
                      <hr>
                      <p><?php echo $postContent; ?></p>
-                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                     <a class="btn btn-primary" href="post.php?pId=<?php echo $postId; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                      <hr>
              <?php
                     }

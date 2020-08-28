@@ -20,44 +20,43 @@ while ($row = mysqli_fetch_assoc($selectPostsById)) {
     $postStatus = $row['postStatus'];
 }
 
-if(isset($_POST['updatePost'])){
+if (isset($_POST['updatePost'])) {
     //THESE ARE THE NAMES FROM name of the option
-     $postAuthor = $_POST['author']; //author from options
-     $postTitle = $_POST['title']; //title from option 
-     $postCategoryId = $_POST['postCategory'];//postCategory from the SELECT line 63
-     $postStatus = $_POST['postStatus'];
-     $postImage = $_FILES['image']['name'];
-     $postImageTemp = $_FILES['image']['tmp_name'];
-     $postContent = $_POST['postContent'];
-     $postTags = $_POST['postTags'];
+    $postAuthor = $_POST['author']; //author from options
+    $postTitle = $_POST['title']; //title from option 
+    $postCategoryId = $_POST['postCategory']; //postCategory from the SELECT line 63
+    $postStatus = $_POST['postStatus'];
+    $postImage = $_FILES['image']['name'];
+    $postImageTemp = $_FILES['image']['tmp_name'];
+    $postContent = $_POST['postContent'];
+    $postTags = $_POST['postTags'];
 
-     move_uploaded_file($postImageTemp, "../images/$postImage");
+    move_uploaded_file($postImageTemp, "../images/$postImage");
 
 
-     if(empty($postImage)){
-         $query = "SELECT * FROM posts WHERE postId = $theGetPostId ";
-         $selectImage = mysqli_query($connection,$query);
-         while($row=mysqli_fetch_array($selectImage)){
-             $postImage = $row['postImage'];
-         }
-     }
+    if (empty($postImage)) {
+        $query = "SELECT * FROM posts WHERE postId = $theGetPostId ";
+        $selectImage = mysqli_query($connection, $query);
+        while ($row = mysqli_fetch_array($selectImage)) {
+            $postImage = $row['postImage'];
+        }
+    }
 
-     $query = "UPDATE posts SET ";
-     $query .="postTitle = '{$postTitle}', ";
-     $query .="postCategoryId = '{$postCategoryId}', "; 
-     $query .="postDate = now(), ";
-     $query .="postAuthor = '{$postAuthor}', ";
-     $query .="postStatus = '{$postStatus}', ";
-     $query .="postTags = '{$postTags}', ";
-     $query .="postContent = '{$postContent}', ";
-     $query .="postImage = '{$postImage}' ";
-     $query .="WHERE postId = {$theGetPostId} "; 
+    $query = "UPDATE posts SET ";
+    $query .= "postTitle = '{$postTitle}', ";
+    $query .= "postCategoryId = '{$postCategoryId}', ";
+    $query .= "postDate = now(), ";
+    $query .= "postAuthor = '{$postAuthor}', ";
+    $query .= "postStatus = '{$postStatus}', ";
+    $query .= "postTags = '{$postTags}', ";
+    $query .= "postContent = '{$postContent}', ";
+    $query .= "postImage = '{$postImage}' ";
+    $query .= "WHERE postId = {$theGetPostId} ";
 
-     $updatePostQuery = mysqli_query($connection,$query);
+    $updatePostQuery = mysqli_query($connection, $query);
 
     confirmQuery($updatePostQuery);
-
-
+    echo "<p class='bg-success'>Post Updated. <a href='../post.php?pId={$theGetPostId}'>View Post</a> or <a href='posts.php'>Edit More Posts</a> </p>";
 }
 ?>
 
@@ -69,7 +68,7 @@ if(isset($_POST['updatePost'])){
         <input value="<?php echo $postTitle; ?>" type="text" class="form-control" name="title">
     </div>
 
-    <select name="postCategory" id="postCategory"> 
+    <select name="postCategory" id="postCategory">
 
         <?php
         $query = "SELECT * FROM categories";
@@ -93,10 +92,19 @@ if(isset($_POST['updatePost'])){
         <label for="title">Post Author</label>
         <input value="<?php echo $postAuthor; ?>" type="text" class="form-control" name="author">
     </div>
+
     <div class="form-group">
-        <label for="postStatus">Post Status</label>
-        <input value="<?php echo $postStatus; ?>" type="text" class="form-control" name="postStatus">
+        <select name="postStatus" id="">
+            <option value='<?php echo $postStatus; ?>'><?php echo $postStatus; ?></option>
+            <?php if ($postStatus === 'published') {
+                echo "<option value='draft'>Draft</option>";
+            } else {
+                echo "<option value='published'>Publish</option>";
+            }
+            ?>
+        </select>
     </div>
+
     <div class="form-group">
         <img width="100" src="../images/<?php echo $postImage; ?>" alt="">
         <input type="file" name="image">
@@ -107,7 +115,7 @@ if(isset($_POST['updatePost'])){
     </div>
     <div class="form-group">
         <label for="postContent">Post Content</label>
-        <textarea class="form-control" name="postContent" id="" cols="30" rows="10"><?php echo $postContent; ?></textarea>
+        <textarea class="form-control" name="postContent" id="body" cols="30" rows="10"><?php echo $postContent; ?></textarea>
     </div>
     <div class="form-group">
         <input class="btn btn-primary" type="submit" name="updatePost" value="Update Post">

@@ -154,6 +154,11 @@ if (!isset($_SESSION['role'])) {
 
             <?php
 
+            $query = "SELECT * FROM posts WHERE postStatus = 'published'";
+            $selectAllPublishedPosts = mysqli_query($connection, $query);
+            confirmQuery($selectAllPublishedPosts);
+            $postPublishedCounts = mysqli_num_rows($selectAllPublishedPosts);
+
             $query = "SELECT * FROM posts WHERE postStatus = 'draft'";
             $selectAllDraftPosts = mysqli_query($connection, $query);
             confirmQuery($selectAllDraftPosts);
@@ -186,9 +191,9 @@ if (!isset($_SESSION['role'])) {
 
                             <?php
 
-                            $elementText = ['Active Posts', 'Draft Posts', 'Comments', 'Unapproved Comments', 'Users', 'Subscribers', 'Categories'];
-                            $elementCount = [$postCounts, $postDraftCounts, $commentCounts, $commentsUnapproveCounts, $countUsers, $usersSubscriberCounts, $countCategories];
-                            for ($i = 0; $i < 7; $i++) {
+                            $elementText = ['All Posts', 'Active Posts', 'Draft Posts', 'Comments', 'Unapproved Comments', 'Users', 'Subscribers', 'Categories'];
+                            $elementCount = [$postCounts, $postPublishedCounts, $postDraftCounts, $commentCounts, $commentsUnapproveCounts, $countUsers, $usersSubscriberCounts, $countCategories];
+                            for ($i = 0; $i < 8; $i++) {
 
                                 echo "['{$elementText[$i]}'" . "," . "{$elementCount[$i]}],";
                             }
@@ -203,7 +208,7 @@ if (!isset($_SESSION['role'])) {
                             chart: {
                                 title: '',
                                 subtitle: '',
-                                
+
                             }
                         };
 

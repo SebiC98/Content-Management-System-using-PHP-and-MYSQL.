@@ -1,3 +1,4 @@
+
 <?php
 
 if (isset($_POST['createPost'])) {
@@ -71,7 +72,7 @@ if (isset($_POST['createPost'])) {
     </div>
     <div class="form-group">
         <label for="postContent">Post Content</label>
-        <textarea class="form-control" name="postContent" id="" cols="30" rows="10"></textarea>
+        <textarea class="form-control" name="postContent" id="body" cols="30" rows="10"></textarea>
     </div>
     <div class="form-group">
         <input class="btn btn-primary" type="submit" name="createPost" value="Publish Post">

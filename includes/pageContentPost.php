@@ -36,7 +36,6 @@
                  <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
                  <hr>
                  <p><?php echo $postContent; ?></p>
-                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                  <hr>
              <?php
                 }
