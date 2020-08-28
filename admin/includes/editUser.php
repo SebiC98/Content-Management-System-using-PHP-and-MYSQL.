@@ -36,18 +36,26 @@ if (isset($_POST['editUser'])) {
 
     // move_uploaded_file($postImageTemp, "../images/$postImage");
 
+    $query = "SELECT randSalt FROM users";
+    $selectRandSaltQuery = mysqli_query($connection, $query);
+    confirmQuery($selectRandSaltQuery);
+
+    $row = mysqli_fetch_array($selectRandSaltQuery);
+    $salt = $row['randSalt'];
+    $hashedPassword = crypt($userPassword, $salt);
+
     $query = "UPDATE users SET ";
-    $query .="userFirstname = '{$userFirstname}', ";
-    $query .="userLastname = '{$userLastname}', "; 
-    $query .="userRole = '{$userRole}', ";
-    $query .="userName = '{$userName}', ";
-    $query .="userEmail = '{$userEmail}', ";
-    $query .="userPassword = '{$userPassword}' ";
-    $query .="WHERE userId = {$theUserId} "; 
+    $query .= "userFirstname = '{$userFirstname}', ";
+    $query .= "userLastname = '{$userLastname}', ";
+    $query .= "userRole = '{$userRole}', ";
+    $query .= "userName = '{$userName}', ";
+    $query .= "userEmail = '{$userEmail}', ";
+    $query .= "userPassword = '{$hashedPassword}' ";
+    $query .= "WHERE userId = {$theUserId} ";
 
-    $updateUserQuery = mysqli_query($connection,$query);
+    $updateUserQuery = mysqli_query($connection, $query);
 
-   confirmQuery($updateUserQuery);
+    confirmQuery($updateUserQuery);
 }
 
 
@@ -64,7 +72,7 @@ if (isset($_POST['editUser'])) {
     </div>
     <div class="form-group">
         <select name="userRole" id="">
-            <option value="subscriber"><?php echo $userRole; ?></option>
+            <option value="<?php echo $userRole; ?>"><?php echo $userRole; ?></option>
             <?php
             if ($userRole == 'admin') {
                 echo "<option value='subscriber'>subscriber</option>";

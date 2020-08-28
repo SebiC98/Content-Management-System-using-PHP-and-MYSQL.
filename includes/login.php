@@ -23,6 +23,7 @@ if (isset($_POST['login'])) {
         $dbUserLastname = $row['userLastname'];
         $dbUserRole = $row['userRole'];
     }
+   
 
     if ($username === $dbUserName && $password === $dbUserPassword) {
 
@@ -30,9 +31,13 @@ if (isset($_POST['login'])) {
         $_SESSION['firstname'] = $dbUserFirstname;
         $_SESSION['lastname'] = $dbUserLastname;
         $_SESSION['role'] = $dbUserRole;
-        
+
         header("Location: ../admin/admin.php");
-    } else
-        header("Location: ../index.php");
+    } else {
+        //header("Location: ../index.php");
+        echo "<h1>$password</h1>";
+        echo "<br>";
+        echo "<h1>$dbUserPassword</h1>";
+    }
 }
 ?>

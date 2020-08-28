@@ -9,8 +9,30 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Home</title>
 
+    <?php
+
+    if (isset($_GET['category'])) {
+        $thePostCategoryId = $_GET['category'];
+
+        $query = "SELECT * FROM categories WHERE categoryId = $thePostCategoryId";
+        $selectAllCategoriesQuerry = mysqli_query($connection, $query);
+        $row = mysqli_fetch_assoc($selectAllCategoriesQuerry);
+        $categoryTitle = $row['categoryTitle'];
+    ?>
+        <title><?php echo $categoryTitle; ?></title>
+    <?php }
+    if (isset($_GET['pId'])) {
+        $thePostId = $_GET['pId'];
+        $query = "SELECT * FROM posts WHERE postId = $thePostId ";
+        $selectAllPostsQuerry = mysqli_query($connection, $query);
+        $row = mysqli_fetch_assoc($selectAllPostsQuerry);
+        $postTitle = $row['postTitle'];
+    ?>
+        <title><?php echo $postTitle; ?></title>
+    <?php } else { ?>
+        <title>Home</title>
+    <?php } ?>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
