@@ -1,5 +1,4 @@
 <?php include "includes/adminHeader.php"; ?>
-<?php session_start(); ?>
 
 <?php if (isset($_SESSION['username'])) {
 

@@ -34,9 +34,6 @@
                             case  'editPost';
                                 include "includes/editPost.php";
                                 break;
-                            case  '200';
-                                echo "NICE 200";
-                                break;
                             default:
                                 include "includes/viewAllposts.php";
                                 break;

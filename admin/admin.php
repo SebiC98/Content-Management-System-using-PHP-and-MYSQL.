@@ -1,11 +1,12 @@
-<?php session_start(); ?>
+<?php include "includes/adminHeader.php"; ?>
+
 <?php
 if (!isset($_SESSION['role'])) {
 
     header("Location: ../index.php");
 }
 ?>
-<?php include "includes/adminHeader.php"; ?>
+
 <div id="wrapper">
     <!-- Navigation -->
     <?php include "includes/adminNavigation.php"; ?>
