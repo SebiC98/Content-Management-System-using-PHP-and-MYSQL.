@@ -6,42 +6,43 @@
          <div class="col-md-8">
              <?php
 
- if(isset($_GET['category'])){
-     $thePostCategoryId = $_GET['category'];
- }
+                if (isset($_GET['category'])) {
+                    $thePostCategoryId = $_GET['category'];
 
 
-                $query = "SELECT * FROM posts WHERE postCategoryId = $thePostCategoryId";
-                $selectAllPostsQuerry = mysqli_query($connection, $query);
 
-                while ($row = mysqli_fetch_assoc($selectAllPostsQuerry)) {
-                    $postId = $row['postId'];
-                    $postTitle = $row['postTitle'];
-                    $postAuthor = $row['postAuthor'];
-                    $postDate = $row['postDate'];
-                    $postImage = $row['postImage'];
-                    $postContent = substr($row['postContent'],0,300);
+                    $query = "SELECT * FROM posts WHERE postCategoryId = $thePostCategoryId";
+                    $selectAllPostsQuerry = mysqli_query($connection, $query);
+
+                    while ($row = mysqli_fetch_assoc($selectAllPostsQuerry)) {
+                        $postId = $row['postId'];
+                        $postTitle = $row['postTitle'];
+                        $postAuthor = $row['postAuthor'];
+                        $postDate = $row['postDate'];
+                        $postImage = $row['postImage'];
+                        $postContent = substr($row['postContent'], 0, 300);
                 ?>
-                 <h1 class="page-header">
-                     Page Heading
-                     <small>Secondary Text</small>
-                 </h1>
+                     <h1 class="page-header">
+                         Page Heading
+                         <small>Secondary Text</small>
+                     </h1>
 
-                 <!-- First Blog Post -->
-                 <h2>
-                     <a href="post.php?pId=<?php echo $postId;?>"><?php echo $postTitle; ?></a>
-                 </h2>
-                 <p class="lead">
-                     by <a href="index.php"><?php echo $postAuthor; ?></a>
-                 </p>
-                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate; ?></p>
-                 <hr>
-                 <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
-                 <hr>
-                 <p><?php echo $postContent; ?></p>
-                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
-                 <hr>
+                     <!-- First Blog Post -->
+                     <h2>
+                         <a href="post.php?pId=<?php echo $postId; ?>"><?php echo $postTitle; ?></a>
+                     </h2>
+                     <p class="lead">
+                         by <a href="authorPosts.php?author=<?php echo $postAuthor; ?>&pId=<?php echo $postId; ?>"><?php echo $postAuthor; ?></a>
+                     </p>
+                     <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate; ?></p>
+                     <hr>
+                     <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
+                     <hr>
+                     <p><?php echo $postContent; ?></p>
+                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                     <hr>
              <?php
+                    }
                 }
                 ?>
              <!-- Blog Comments -->

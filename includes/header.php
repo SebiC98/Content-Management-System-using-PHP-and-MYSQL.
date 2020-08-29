@@ -21,16 +21,22 @@
         $categoryTitle = $row['categoryTitle'];
     ?>
         <title><?php echo $categoryTitle; ?></title>
-    <?php }
+        <?php }
     if (isset($_GET['pId'])) {
-        $thePostId = $_GET['pId'];
-        $query = "SELECT * FROM posts WHERE postId = $thePostId ";
-        $selectAllPostsQuerry = mysqli_query($connection, $query);
-        $row = mysqli_fetch_assoc($selectAllPostsQuerry);
-        $postTitle = $row['postTitle'];
-    ?>
-        <title><?php echo $postTitle; ?></title>
-    <?php } else { ?>
+        if (!isset($_GET['author'])) {
+            $thePostId = $_GET['pId'];
+            $query = "SELECT * FROM posts WHERE postId = $thePostId ";
+            $selectAllPostsQuerry = mysqli_query($connection, $query);
+            $row = mysqli_fetch_assoc($selectAllPostsQuerry);
+            $postTitle = $row['postTitle'];
+            $postAuthor = $row['postAuthor'];
+        ?>
+            <title><?php echo $postTitle; ?></title>
+        <?php } else {
+            $thePostAuthor = $_GET['author'];?>
+            <title>Posts from <?php echo $thePostAuthor; ?></title>
+        <?php }
+    } else { ?>
         <title>Home</title>
     <?php } ?>
     <!-- Bootstrap Core CSS -->

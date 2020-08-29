@@ -233,5 +233,5 @@ if (!isset($_SESSION['role'])) {
 
     </div>
     <!-- /#page-wrapper -->
-
+    <script src="js/scripts.js"></script>
     <?php include "includes/adminFooter.php"; ?>
