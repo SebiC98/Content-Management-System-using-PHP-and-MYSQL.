@@ -11,6 +11,7 @@ if (isset($_POST['createUser'])) {
 
     $userEmail = $_POST['userEmail'];
     $userPassword = $_POST['password'];
+    $userPassword = password_hash($userPassword, PASSWORD_BCRYPT, array('cost' => 10));
     //  $postCommentCount = 4;
     // $postDate = date('d-m-y');
 
