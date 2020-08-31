@@ -8,6 +8,7 @@ if (!isset($_SESSION['role'])) {
 ?>
 
 <div id="wrapper">
+
     <!-- Navigation -->
     <?php include "includes/adminNavigation.php"; ?>
 
@@ -23,6 +24,7 @@ if (!isset($_SESSION['role'])) {
                         Welcome to Admin,
                         <small><?php echo $_SESSION['username']; ?></small>
                     </h1>
+
                 </div>
             </div>
             <!-- /.row -->

@@ -1,7 +1,47 @@
+
+
 <?php
-function confirmQuery($result){
+
+
+function usersOnline()
+{
+    if (isset($_GET['onlineusers'])) {
+
+
+        global $connection;
+
+        if (!$connection) {
+
+            session_start();
+
+            include("../includes/db.php");
+            $session = session_id();
+            $time = time();
+            $timeOutInSeconds = 5;
+            $timeOut = $time - $timeOutInSeconds;
+
+            $query = "SELECT * FROM usersonline WHERE session = '$session'";
+            $sendQuery = mysqli_query($connection, $query);
+            confirmQuery($sendQuery);
+
+            $count = mysqli_num_rows($sendQuery);
+            if ($count == NULL) {
+                mysqli_query($connection, "INSERT INTO usersonline(session, time) VALUES ('$session','$time')");
+            } else {
+                mysqli_query($connection, "UPDATE usersonline SET time ='$time WHERE session ='$session'");
+            }
+            $usersOnlineQuery =  mysqli_query($connection, "SELECT * FROM usersonline WHERE time > '$timeOut'");
+            echo $countUsers = mysqli_num_rows($usersOnlineQuery);
+        }
+    }
+}
+
+usersOnline();
+
+function confirmQuery($result)
+{
     global $connection;
-    if(!$result){
+    if (!$result) {
         die("QUERY FAILED" . mysqli_error($connection));
     }
 }
@@ -25,6 +65,7 @@ function insertCategories()
         }
     }
 }
+
 
 function findAllCategories()
 {
