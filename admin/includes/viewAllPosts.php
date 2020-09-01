@@ -72,7 +72,7 @@ if (isset($_POST['checkBoxArray'])) {
                 <th>Id</th>
                 <th>Category</th>
                 <th>Title</th>
-                <th>Author</th>
+                <th>User</th>
                 <th>Date</th>
                 <th>Image</th>
                 <th>Content</th>
@@ -97,6 +97,7 @@ if (isset($_POST['checkBoxArray'])) {
                 $postCategoryId = $row['postCategoryId'];
                 $postTitle = $row['postTitle'];
                 $postAuthor = $row['postAuthor'];
+                $postUser = $row['postUser'];
                 $postDate = $row['postDate'];
                 $postImage = $row['postImage'];
                 $postContent = substr($row['postContent'], 0, 100);
@@ -121,7 +122,14 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<td>{$categoryTitle}</td>";
 
                 echo "<td>$postTitle</td>";
-                echo "<td>$postAuthor</td>";
+
+                if (!empty($postAuthor)) {
+                    echo "<td>$postAuthor</td>";
+                } elseif (!empty($postUser)) {
+                    echo "<td>$postUser</td>";
+                }
+
+
                 echo "<td>$postDate</td>";
                 echo "<td><img width='100' src='../images/$postImage' alt='image'></td>";
                 echo "<td>$postContent</td>";

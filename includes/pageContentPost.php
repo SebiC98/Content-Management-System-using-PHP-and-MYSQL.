@@ -20,7 +20,7 @@
 
                     while ($row = mysqli_fetch_assoc($selectAllPostsQuerry)) {
                         $postTitle = $row['postTitle'];
-                        $postAuthor = $row['postAuthor'];
+                        $postAuthor = $row['postUser'];
                         $postDate = $row['postDate'];
                         $postImage = $row['postImage'];
                         $postContent = $row['postContent'];

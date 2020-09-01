@@ -1,10 +1,9 @@
-
 <?php
 
 if (isset($_POST['createPost'])) {
     $postTitle = $_POST['title'];
     $postCategoryId = $_POST['postCategory'];
-    $postAuthor = $_POST['author'];
+    $postUser = $_POST['postUser'];
     $postStatus = $_POST['postStatus'];
 
     $postImage = $_FILES['image']['name'];
@@ -17,7 +16,7 @@ if (isset($_POST['createPost'])) {
 
     move_uploaded_file($postImageTemp, "../images/$postImage");
 
-    $query = "INSERT INTO posts(postCategoryId, postTitle, postAuthor, postDate, postImage, postContent, postTags, postStatus) VALUES({$postCategoryId},'{$postTitle}','{$postAuthor}',now(),'{$postImage}','{$postContent}','{$postTags}','{$postStatus}') ";
+    $query = "INSERT INTO posts(postCategoryId, postTitle, postUser, postDate, postImage, postContent, postTags, postStatus) VALUES({$postCategoryId},'{$postTitle}','{$postUser}',now(),'{$postImage}','{$postContent}','{$postTags}','{$postStatus}') ";
 
     $createPostQuery = mysqli_query($connection, $query);
 
@@ -26,7 +25,6 @@ if (isset($_POST['createPost'])) {
     $theGetPostId = mysqli_insert_id($connection);
 
     echo "<p class='bg-success'>Post Created. <a href='../post.php?pId={$theGetPostId}'>View Post</a> or <a href='posts.php'>Edit More Posts</a> </p>";
-
 }
 
 
@@ -38,6 +36,7 @@ if (isset($_POST['createPost'])) {
         <input type="text" class="form-control" name="title">
     </div>
     <div class="form-group">
+        <label for="category">Category</label>
         <select name="postCategory" id="postCategory">
 
             <?php
@@ -60,8 +59,24 @@ if (isset($_POST['createPost'])) {
         </select>
     </div>
     <div class="form-group">
-        <label for="title">Post Author</label>
-        <input type="text" class="form-control" name="author">
+        <label for="title">Users</label>
+        <select name="postUser" id="postUser">
+
+            <?php
+            $query = "SELECT * FROM users";
+            $selectUsers = mysqli_query($connection, $query);
+
+            confirmQuery($selectUsers);
+
+            while ($row = mysqli_fetch_assoc($selectUsers)) {
+                $userId = $row['userId'];
+                $userName = $row['userName'];
+                echo "<option value='{$userName}'>{$userName}</option>";
+            }
+
+
+            ?>
+        </select>
     </div>
     <div class="form-group">
         <select name="postStatus" id="">

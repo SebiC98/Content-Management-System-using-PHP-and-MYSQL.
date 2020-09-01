@@ -17,7 +17,7 @@
                     while ($row = mysqli_fetch_assoc($selectAllPostsQuerry)) {
                         $postId = $row['postId'];
                         $postTitle = $row['postTitle'];
-                        $postAuthor = $row['postAuthor'];
+                        $postAuthor = $row['postUser'];
                         $postDate = $row['postDate'];
                         $postImage = $row['postImage'];
                         $postContent = substr($row['postContent'], 0, 300);

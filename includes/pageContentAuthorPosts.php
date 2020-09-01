@@ -10,12 +10,12 @@
                     $thePostId = $_GET['pId'];
                     $thePostAuthor = $_GET['author'];
 
-                    $query = "SELECT * FROM posts WHERE postAuthor = '{$thePostAuthor}' ";
+                    $query = "SELECT * FROM posts WHERE postUser = '{$thePostAuthor}' ";
                     $selectAllPostsQuerry = mysqli_query($connection, $query);
 
                     while ($row = mysqli_fetch_assoc($selectAllPostsQuerry)) {
                         $postTitle = $row['postTitle'];
-                        $postAuthor = $row['postAuthor'];
+                        $postAuthor = $row['postUser'];
                         $postDate = $row['postDate'];
                         $postImage = $row['postImage'];
                         $postContent = $row['postContent'];
