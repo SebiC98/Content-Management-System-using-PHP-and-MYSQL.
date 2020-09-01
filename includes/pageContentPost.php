@@ -69,15 +69,15 @@
                             die("QUERY FAILED " . mysqli_error($connection));
                         }
 
-                        if (isset($_POST['createComment'])) {
-                            $query = "UPDATE posts SET postCommentCount = postCommentCount + 1 ";
-                            $query .= "WHERE postId = $thePostId ";
-                        }
-                        $updateCommentCountQuery = mysqli_query($connection, $query);
+                        // if (isset($_POST['createComment'])) {
+                        //     $query = "UPDATE posts SET postCommentCount = postCommentCount + 1 ";
+                        //     $query .= "WHERE postId = $thePostId ";
+                        // }
+                        // $updateCommentCountQuery = mysqli_query($connection, $query);
 
-                        if (!$updateCommentCountQuery) {
-                            die("QUERY FAILED " . mysqli_error($connection));
-                        }
+                        // if (!$updateCommentCountQuery) {
+                        //     die("QUERY FAILED " . mysqli_error($connection));
+                        // }
                     } else {
                         echo "<script>alert('Fields cannot be empty!')</script>";
                     }
