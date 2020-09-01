@@ -26,7 +26,7 @@
             $userEmail = $row['userEmail'];
             $userRole = $row['userRole'];
             $userImage = $row['userImage'];
-    
+
 
 
 
@@ -45,7 +45,7 @@
             echo "<td>$userLastname</td>";
             echo "<td>$userEmail</td>";
             echo "<td>$userRole</td>";
-    
+
 
             // $query = "SELECT * FROM posts where postId = $commentPostId";
             // $selectPostIdQuery = mysqli_query($connection, $query);
@@ -98,19 +98,21 @@ if (isset($_GET['changeToSubscriber'])) {
 
 
 if (isset($_GET['delete'])) {
+    if (isset($_SESSION['userrole'])) {
+        if ($_SESSION['userrole'] == 'admin') {
 
-    $theUserId = $_GET['delete'];
-    $query = "DELETE FROM users WHERE userId = {$theUserId}";
+            $theUserId = mysqli_real_escape_string($connection, $_GET['delete']);
+            $query = "DELETE FROM users WHERE userId = {$theUserId}";
 
-    $deleteUser = mysqli_query($connection, $query);
+            $deleteUser = mysqli_query($connection, $query);
 
-    confirmQuery($deleteUser);
-
-
+            confirmQuery($deleteUser);
 
 
-    header("Location: users.php");
+
+
+            header("Location: users.php");
+        }
+    }
 }
-
-
 ?>
