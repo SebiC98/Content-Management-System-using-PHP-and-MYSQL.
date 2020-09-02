@@ -2,7 +2,7 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<script src="js/jquery.js"></script>
+
 <script src="js/scripts.js"></script>
 <script>
     var divBox = "<div id='load-screen'><div id='loading'></div></div>";

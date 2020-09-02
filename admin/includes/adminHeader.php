@@ -48,6 +48,6 @@ if (isset($_SESSION['role'])) {
     <![endif]-->
     <link href="css/styles.css" rel="stylesheet">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+    <script src="js/jquery.js"></script>
 
 </head>
