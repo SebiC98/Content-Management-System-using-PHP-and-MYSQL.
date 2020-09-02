@@ -8,12 +8,17 @@
 
 
 if (isset($_POST['submit'])) {
-    $to = "sebastiancioata98@gmail.com";
+    $to = "sc.cioata.srl@gmail.com";
     $subject = wordwrap($_POST['subject'], 70);
     $body = $_POST['body'];
-    $header = $_POST['email'];
+    $email = $_POST['email'];
+    $headers = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= 'From:  ' . $email . ' <' . $email . '>' . " \r\n" .
+        'Reply-To: ' .  $email . "\r\n" .
+        'X-Mailer: PHP/' . phpversion();
 
-    mail($to, $subject, $body, $header);
+    mail($to, $subject, $body, $headers,);
 }
 ?>
 
