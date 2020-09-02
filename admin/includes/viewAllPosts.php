@@ -24,14 +24,14 @@ if (isset($_POST['checkBoxArray'])) {
                 $selectPostQuery = mysqli_query($connection, $query);
                 confirmQuery($selectPostQuery);
                 while ($row = mysqli_fetch_array($selectPostQuery)) {
-                    $postCategoryId = $row['postCategoryId'];
-                    $postTitle = $row['postTitle'];
-                    $postAuthor = $row['postAuthor'];
-                    $postDate = $row['postDate'];
-                    $postImage = $row['postImage'];
-                    $postContent = $row['postContent'];
-                    $postTags = $row['postTags'];
-                    $postStatus = $row['postStatus'];
+                    $postCategoryId = escape($row['postCategoryId']);
+                    $postTitle = escape($row['postTitle']);
+                    $postAuthor = escape($row['postAuthor']);
+                    $postDate = escape($row['postDate']);
+                    $postImage = escape($row['postImage']);
+                    $postContent = escape($row['postContent']);
+                    $postTags = escape($row['postTags']);
+                    $postStatus = escape($row['postStatus']);
                 }
                 $query = "INSERT INTO posts(postCategoryId, postTitle, postAuthor, postDate, postImage, postContent, postTags, postStatus) VALUES({$postCategoryId},'{$postTitle}','{$postAuthor}',now(),'{$postImage}','{$postContent}','{$postTags}','{$postStatus}') ";
 
@@ -169,7 +169,7 @@ if (isset($_POST['checkBoxArray'])) {
 
 if (isset($_GET['delete'])) {
 
-    $thePostId = $_GET['delete'];
+    $thePostId = escape($_GET['delete']);
 
     $query = "DELETE FROM posts WHERE postId = {$thePostId} ";
     $deleteQuery = mysqli_query($connection, $query);

@@ -1,10 +1,10 @@
 <?php
 
 if (isset($_POST['createPost'])) {
-    $postTitle = $_POST['title'];
-    $postCategoryId = $_POST['postCategory'];
-    $postUser = $_POST['postUser'];
-    $postStatus = $_POST['postStatus'];
+    $postTitle = escape($_POST['title']);
+    $postCategoryId = escape($_POST['postCategory']);
+    $postUser = escape($_POST['postUser']);
+    $postStatus = escape($_POST['postStatus']);
 
     $postImage = $_FILES['image']['name'];
     $postImageTemp = $_FILES['image']['tmp_name'];
