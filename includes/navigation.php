@@ -27,19 +27,39 @@
                 while ($row = mysqli_fetch_assoc($selectAllCategoriesQuerry)) {
                     $categoryTitle = $row['categoryTitle'];
                     $categoryId = $row['categoryId'];
-                    echo "<li><a href='category.php?category=$categoryId'>{$categoryTitle}</a></li>";
+
+                    $categoryClass = '';
+                    $registrationClass = '';
+                    $contactClass = '';
+
+
+                    $pageName = basename($_SERVER['PHP_SELF']);
+                    $registration = 'registration.php';
+                    $contact = 'contact.php';
+
+                    if (isset($_GET['category']) && $_GET['category'] == $categoryId) {
+                        $categoryClass = 'active';
+                    } else if ($pageName == $registration) {
+                        $registrationClass = 'active';
+                    } else if ($pageName == $contact) {
+                        $contactClass = 'active';
+                    }
+                    echo "<li class='$categoryClass'><a href='category.php?category=$categoryId'>{$categoryTitle}</a></li>";
                 }
 
                 ?>
 
+                <?php if (isset($_SESSION['role'])=='admin') {
+                ?>
+                    <li>
+                        <a href="admin/admin.php">Admin</a>
+                    </li>
+                <?php } ?>
 
-                <li>
-                    <a href="admin/admin.php">Admin</a>
-                </li>
-                <li>
+                <li class='<?php echo $registrationClass; ?>'>
                     <a href="registration.php">Registration</a>
                 </li>
-                <li>
+                <li class='<?php echo $contactClass; ?>'>
                     <a href="contact.php">Contact</a>
                 </li>
 
