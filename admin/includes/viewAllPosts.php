@@ -29,13 +29,14 @@ if (isset($_POST['checkBoxArray'])) {
                     $postCategoryId = escape($row['postCategoryId']);
                     $postTitle = escape($row['postTitle']);
                     $postAuthor = escape($row['postAuthor']);
+                    $postUser = escape($row['postUser']);
                     $postDate = escape($row['postDate']);
                     $postImage = escape($row['postImage']);
                     $postContent = escape($row['postContent']);
                     $postTags = escape($row['postTags']);
                     $postStatus = escape($row['postStatus']);
                 }
-                $query = "INSERT INTO posts(postCategoryId, postTitle, postAuthor, postDate, postImage, postContent, postTags, postStatus) VALUES({$postCategoryId},'{$postTitle}','{$postAuthor}',now(),'{$postImage}','{$postContent}','{$postTags}','{$postStatus}') ";
+                $query = "INSERT INTO posts(postCategoryId, postTitle, postAuthor, postUser, postDate, postImage, postContent, postTags, postStatus) VALUES({$postCategoryId},'{$postTitle}','{$postAuthor}', '{$postUser}',now(),'{$postImage}','{$postContent}','{$postTags}','{$postStatus}') ";
 
                 $createPostQuery = mysqli_query($connection, $query);
 

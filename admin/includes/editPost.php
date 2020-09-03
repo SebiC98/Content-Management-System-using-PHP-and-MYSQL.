@@ -79,8 +79,11 @@ if (isset($_POST['updatePost'])) {
         while ($row = mysqli_fetch_assoc($selectCategories)) {
             $categoryId = $row['categoryId'];
             $categoryTitle = $row['categoryTitle'];
-
-            echo "<option value='{$categoryId}'>{$categoryTitle}</option>";
+            if ($categoryId == $postCategoryId) {
+                echo "<option selected value='{$categoryId}'>{$categoryTitle}</option>";
+            } else {
+                echo "<option value='{$categoryId}'>{$categoryTitle}</option>";
+            }
         }
 
 
@@ -106,7 +109,11 @@ if (isset($_POST['updatePost'])) {
             while ($row = mysqli_fetch_assoc($selectUsers)) {
                 $userId = $row['userId'];
                 $userName = $row['userName'];
-                echo "<option value='{$userName}'>{$userName}</option>";
+                if ($userName == $postUser) {
+                    echo "<option selected value='{$userName}'>{$userName}</option>";
+                } else {
+                    echo "<option value='{$userName}'>{$userName}</option>";
+                }
             }
 
 
