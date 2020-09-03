@@ -40,16 +40,7 @@ if (!isset($_SESSION['role'])) {
                                     <i class="fa fa-file-text fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-
-                                    <?php
-
-                                    $query = "SELECT * FROM posts";
-                                    $selectAllPosts = mysqli_query($connection, $query);
-                                    confirmQuery($selectAllPosts);
-                                    $postCounts = mysqli_num_rows($selectAllPosts);
-                                    echo "<div class='huge'>{$postCounts}</div>";
-                                    ?>
-
+                                    <div class='huge'><?php echo $postCounts = recordCount('posts'); ?></div>
                                     <div>Posts</div>
                                 </div>
                             </div>
@@ -71,15 +62,7 @@ if (!isset($_SESSION['role'])) {
                                     <i class="fa fa-comments fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <?php
-
-                                    $query = "SELECT * FROM comments";
-                                    $selectAllComments = mysqli_query($connection, $query);
-                                    confirmQuery($selectAllComments);
-                                    $commentCounts = mysqli_num_rows($selectAllComments);
-                                    echo "<div class='huge'>{$commentCounts}</div>";
-                                    ?>
-
+                                    <div class='huge'><?php echo $commentCounts = recordCount('comments'); ?></div>
                                     <div>Comments</div>
                                 </div>
                             </div>
@@ -101,15 +84,7 @@ if (!isset($_SESSION['role'])) {
                                     <i class="fa fa-user fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <?php
-
-                                    $query = "SELECT * FROM users";
-                                    $selectAllUsers = mysqli_query($connection, $query);
-                                    confirmQuery($selectAllUsers);
-                                    $countUsers = mysqli_num_rows($selectAllUsers);
-                                    echo "<div class='huge'>{$countUsers}</div>";
-                                    ?>
-
+                                    <div class='huge'><?php echo $countUsers = recordCount('users'); ?></div>
                                     <div> Users</div>
                                 </div>
                             </div>
@@ -131,14 +106,7 @@ if (!isset($_SESSION['role'])) {
                                     <i class="fa fa-list fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <?php
-
-                                    $query = "SELECT * FROM categories";
-                                    $selectAllCategories = mysqli_query($connection, $query);
-                                    confirmQuery($selectAllCategories);
-                                    $countCategories = mysqli_num_rows($selectAllCategories);
-                                    echo "<div class='huge'>{$countCategories}</div>";
-                                    ?>
+                                    <div class='huge'><?php echo $countCategories = recordCount('categories'); ?></div>
                                     <div>Categories</div>
                                 </div>
                             </div>

@@ -111,3 +111,12 @@ function updateAndInclude()
         include "includes/updateCategories.php";
     }
 }
+
+function recordCount($tableName){
+    global $connection;
+    $query = "SELECT * FROM ".$tableName;
+    $selectAllPosts = mysqli_query($connection, $query);
+    confirmQuery($selectAllPosts);
+    $result = mysqli_num_rows($selectAllPosts);
+    return $result;
+}
