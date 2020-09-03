@@ -10,7 +10,12 @@
                     $thePostId = $_GET['pId'];
                     $thePostAuthor = $_GET['author'];
 
-                    $query = "SELECT * FROM posts WHERE postUser = '{$thePostAuthor}' ";
+                    if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                        $query = "SELECT * FROM posts WHERE postUser = '{$thePostAuthor}' ";
+                    } else {
+                        $query = "SELECT * FROM posts WHERE postUser = '{$thePostAuthor}' AND postStatus = 'published' ";
+                    }
+                   
                     $selectAllPostsQuerry = mysqli_query($connection, $query);
 
                     while ($row = mysqli_fetch_assoc($selectAllPostsQuerry)) {

@@ -17,32 +17,37 @@
                 } else {
                     $page1 = ($page * $perPage) - $perPage;
                 }
+                if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                    $postQueryCount = "SELECT * FROM posts";
+                } else {
+                    $postQueryCount = "SELECT * FROM posts WHERE postStatus = 'published'";
+                    
+                }
 
-
-                $postQueryCount = "SELECT * FROM posts";
                 $findCount = mysqli_query($connection, $postQueryCount);
                 $count = mysqli_num_rows($findCount);
+                if ($count < 1) {
+                    echo "<h1 class='text-center'>No posts available</h1>";
+                } else {
+                    $count = ceil($count / $perPage);
 
-                $count = ceil($count / $perPage);
+
+                    $query = "SELECT * FROM posts LIMIT $page1, $perPage ";
+                    $selectAllPostsQuerry = mysqli_query($connection, $query);
+
+                    while ($row = mysqli_fetch_assoc($selectAllPostsQuerry)) {
+                        $postId = $row['postId'];
+                        $postTitle = $row['postTitle'];
+                        $postAuthor = $row['postUser'];
+                        $postDate = $row['postDate'];
+                        $postImage = $row['postImage'];
+                        $postContent = substr($row['postContent'], 0, 300);
+                        $postStatus = $row['postStatus'];
 
 
-                $query = "SELECT * FROM posts LIMIT $page1, $perPage";
-                $selectAllPostsQuerry = mysqli_query($connection, $query);
-
-                while ($row = mysqli_fetch_assoc($selectAllPostsQuerry)) {
-                    $postId = $row['postId'];
-                    $postTitle = $row['postTitle'];
-                    $postAuthor = $row['postUser'];
-                    $postDate = $row['postDate'];
-                    $postImage = $row['postImage'];
-                    $postContent = substr($row['postContent'], 0, 300);
-                    $postStatus = $row['postStatus'];
-
-                    if ($postStatus == 'published') {
                 ?>
                      <h1 class="page-header">
-                         Page Heading
-                         <small>Secondary Text</small>
+                         Posts
                      </h1>
 
                      <!-- First Blog Post -->
@@ -64,6 +69,7 @@
              <?php
                     }
                 }
+
                 ?>
              <!-- Blog Comments -->
 
@@ -87,9 +93,9 @@
      <ul class="pager">
          <?php
             for ($i = 1; $i <= $count; $i++) {
-                if($i == $page){
+                if ($i == $page) {
                     echo "<li><a class='activeLink' href='index.php?page={$i}'>{$i}</a></li>";
-                }else{
+                } else {
                     echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
                 }
             } ?>

@@ -3,7 +3,7 @@
 
 
 if (isset($_POST['checkBoxArray'])) {
-    foreach ($_POST['checkBoxArra y'] as $postValueId) {
+    foreach ($_POST['checkBoxArray'] as $postValueId) {
         $bulkOptions = $_POST['bulkOptions'];
         switch ($bulkOptions) {
             case 'published':

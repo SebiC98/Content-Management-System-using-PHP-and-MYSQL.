@@ -11,7 +11,7 @@
 
                     $search = $_POST['search'];
 
-                    $query = "SELECT * FROM posts WHERE postTags LIKE '%$search%'";
+                    $query = "SELECT * FROM posts WHERE postTags LIKE '%$search%' AND postStatus = 'published'";
                     $searchQuery = mysqli_query($connection, $query);
 
                     if (!$searchQuery) {
