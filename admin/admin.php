@@ -125,25 +125,14 @@ if (!isset($_SESSION['role'])) {
 
             <?php
 
-            $query = "SELECT * FROM posts WHERE postStatus = 'published'";
-            $selectAllPublishedPosts = mysqli_query($connection, $query);
-            confirmQuery($selectAllPublishedPosts);
-            $postPublishedCounts = mysqli_num_rows($selectAllPublishedPosts);
+            $postPublishedCounts = checkStatus('posts','postStatus','published');
 
-            $query = "SELECT * FROM posts WHERE postStatus = 'draft'";
-            $selectAllDraftPosts = mysqli_query($connection, $query);
-            confirmQuery($selectAllDraftPosts);
-            $postDraftCounts = mysqli_num_rows($selectAllDraftPosts);
+            $postDraftCounts = checkStatus('posts','postStatus','draft');
 
-            $query = "SELECT * FROM comments WHERE commentStatus = 'unapproved'";
-            $selectAllUnapproveComments = mysqli_query($connection, $query);
-            confirmQuery($selectAllUnapproveComments);
-            $commentsUnapproveCounts = mysqli_num_rows($selectAllUnapproveComments);
+            $commentsUnapproveCounts = checkStatus('comments','commentStatus','unapproved');
 
-            $query = "SELECT * FROM users WHERE userRole = 'subscriber'";
-            $selectAllSubscriberUsers = mysqli_query($connection, $query);
-            confirmQuery($selectAllSubscriberUsers);
-            $usersSubscriberCounts = mysqli_num_rows($selectAllSubscriberUsers);
+            $usersSubscriberCounts = checkUserRole('users','userRole','subscriber'); 
+         
 
 
 

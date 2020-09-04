@@ -92,7 +92,11 @@ if (isset($_POST['checkBoxArray'])) {
         <tbody>
             <?php
 
-            $query = "SELECT * FROM posts ORDER BY postId DESC ";
+            // $query = "SELECT * FROM posts ORDER BY postId DESC ";
+            $query = "SELECT posts.postId, posts.postAuthor, posts.postUser, posts.postTitle, posts.postCategoryId, posts.postStatus, posts.postImage, ";
+            $query .= "posts.postTags, posts.postCommentCount, posts.postDate, posts.postViewsCount, posts.postContent, categories.categoryId, categories.categoryTitle ";
+            $query .= "FROM posts ";
+            $query .= "LEFT JOIN categories ON posts.postCategoryId = categories.categoryId ORDER BY posts.postId DESC ";
             $selectPosts = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($selectPosts)) {
@@ -108,6 +112,9 @@ if (isset($_POST['checkBoxArray'])) {
                 $postCommentCount = $row['postCommentCount'];
                 $postStatus = $row['postStatus'];
                 $postViewsCount = $row['postViewsCount'];
+                $theCategoryTitle = $row['categoryTitle'];
+                $theCategoryId = $row['categoryId'];
+
 
                 echo "<tr>";
             ?>
@@ -115,14 +122,14 @@ if (isset($_POST['checkBoxArray'])) {
             <?php
 
                 echo "<td>$postId</td>";
-                $query = "SELECT * FROM categories WHERE categoryId = $postCategoryId";
-                $selectCategoriesId = mysqli_query($connection, $query);
-                confirmQuery($selectCategoriesId);
-                while ($row = mysqli_fetch_assoc($selectCategoriesId)) {
-                    $categoryTitle = $row['categoryTitle'];
-                }
+                // $query = "SELECT * FROM categories WHERE categoryId = $postCategoryId";
+                // $selectCategoriesId = mysqli_query($connection, $query);
+                // confirmQuery($selectCategoriesId);
+                // while ($row = mysqli_fetch_assoc($selectCategoriesId)) {
+                //     $categoryTitle = $row['categoryTitle'];
+                // }
 
-                echo "<td>{$categoryTitle}</td>";
+                echo "<td>$theCategoryTitle</td>";
 
                 echo "<td>$postTitle</td>";
 
@@ -192,17 +199,16 @@ if (isset($_GET['reset'])) {
     confirmQuery($resetQuery);
     header("Location: posts.php");
 }
-include("deleteModal.php"); 
+include("deleteModal.php");
 ?>
 
 <script>
-
     $(document).ready(function() {
         $(".deleteLink").on('click', function() {
             var id = $(this).attr("rel");
             var deleteUrl = "posts.php?delete=" + id + " ";
 
-            $(".modalDeleteLink").attr("href", deleteUrl); 
+            $(".modalDeleteLink").attr("href", deleteUrl);
 
             $("#myModal").modal('show');
         })

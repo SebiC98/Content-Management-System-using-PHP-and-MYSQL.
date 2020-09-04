@@ -112,11 +112,29 @@ function updateAndInclude()
     }
 }
 
-function recordCount($tableName){
+function recordCount($tableName)
+{
     global $connection;
-    $query = "SELECT * FROM ".$tableName;
+    $query = "SELECT * FROM " . $tableName;
     $selectAllPosts = mysqli_query($connection, $query);
     confirmQuery($selectAllPosts);
     $result = mysqli_num_rows($selectAllPosts);
     return $result;
+}
+
+function checkStatus($table, $column, $status)
+{
+    global $connection;
+    $query = "SELECT * FROM $table WHERE $column = '$status'";
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+    return mysqli_num_rows($result);
+}
+
+function checkUserRole($table, $column, $role){
+    global $connection;
+    $query = "SELECT * FROM users WHERE userRole = '$role'";
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+    return mysqli_num_rows($result);
 }
