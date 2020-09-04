@@ -1,6 +1,7 @@
 <title>Registration</title>
 <?php include "includes/db.php"; ?>
 <?php include "includes/header.php"; ?>
+<?php include "admin/functions.php"; ?>
 
 <?php
 
@@ -10,6 +11,10 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
+    if(usernameExists($username)){
+        $message = "User exists";
+    }
+
     if (!empty($username) && !empty($password) && !empty($email)) {
 
         $username =  mysqli_real_escape_string($connection, $username);
@@ -18,17 +23,7 @@ if (isset($_POST['submit'])) {
 
         $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
 
-        // $query = "SELECT randSalt FROM users";
-        // $selectRandSaltQuery = mysqli_query($connection, $query);
-
-        // if (!$selectRandSaltQuery) {
-        //     die("Query Failed" . mysqli_error($connection));
-        // }
-
-        // $row = mysqli_fetch_array($selectRandSaltQuery);
-        // $salt = $row['randSalt'];
-        
-        //$password = crypt($password,$salt);
+      
 
 
         $query = "INSERT INTO users(userName, userPassword, userEmail, userRole) ";
@@ -39,7 +34,7 @@ if (isset($_POST['submit'])) {
         if (!$registerUserQuery) {
             die("Query Failed" . mysqli_error($connection));
         }
-        $message ="Your Registration has been submitted";
+        // $message ="Your Registration has been submitted";
     }else{
         $message = "Fields cannot be empty";
     }

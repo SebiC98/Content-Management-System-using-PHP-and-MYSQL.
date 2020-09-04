@@ -1,5 +1,14 @@
 <?php include "includes/adminHeader.php"; ?>
 
+<?php
+ if(!isAdmin($_SESSION['username'])){
+     header("Location: admin.php");
+ }
+
+
+?>
+
+
 <body>
 
     <div id="wrapper">

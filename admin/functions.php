@@ -131,10 +131,40 @@ function checkStatus($table, $column, $status)
     return mysqli_num_rows($result);
 }
 
-function checkUserRole($table, $column, $role){
+function checkUserRole($table, $column, $role)
+{
     global $connection;
     $query = "SELECT * FROM users WHERE userRole = '$role'";
     $result = mysqli_query($connection, $query);
     confirmQuery($result);
     return mysqli_num_rows($result);
+}
+
+function isAdmin($username)
+{
+    global $connection;
+    $query = "SELECT userRole FROM users WHERE userName = '$username'";
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+
+    $row = mysqli_fetch_array($result);
+    if ($row['userRole'] == 'admin') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function usernameExists($username)
+{
+    global $connection;
+    $query = "SELECT userName FROM users WHERE userName = '$username'";
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+
+    if (mysqli_num_rows($result) > 0) {
+        return true;
+    } else {
+        return false;
+    }
 }
