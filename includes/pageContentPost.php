@@ -44,7 +44,7 @@
                          </p>
                          <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate; ?></p>
                          <hr>
-                         <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
+                         <img class="img-responsive" src="/cms/images/<?php echo $postImage; ?>" alt="">
                          <hr>
                          <p><?php echo $postContent; ?></p>
                          <hr>

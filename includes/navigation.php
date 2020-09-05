@@ -11,7 +11,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">Home</a>
+            <a class="navbar-brand" href="/cms">Home</a>
         </div>
 
 
@@ -44,7 +44,7 @@
                     } else if ($pageName == $contact) {
                         $contactClass = 'active';
                     }
-                    echo "<li class='$categoryClass'><a href='category.php?category=$categoryId'>{$categoryTitle}</a></li>";
+                    echo "<li class='$categoryClass'><a href='/cms/category/$categoryId'>{$categoryTitle}</a></li>";
                 }
 
                 ?>
@@ -52,15 +52,15 @@
                 <?php if (isset($_SESSION['role'])=='admin') {
                 ?>
                     <li>
-                        <a href="admin/admin.php">Admin</a>
+                        <a href="/cms/admin/admin.php">Admin</a>
                     </li>
                 <?php } ?>
 
                 <li class='<?php echo $registrationClass; ?>'>
-                    <a href="registration.php">Registration</a>
+                    <a href="/cms/registration">Registration</a>
                 </li>
                 <li class='<?php echo $contactClass; ?>'>
-                    <a href="contact.php">Contact</a>
+                    <a href="/cms/contact">Contact</a>
                 </li>
 
                 <?php
@@ -69,7 +69,7 @@
 
                     if (isset($_GET['pId'])) {
                         $thePostId = $_GET['pId'];
-                        echo "<li><a href='admin/posts.php?source=editPost&pId=$thePostId'>Edit Post </a></li>";
+                        echo "<li><a href='/cms/admin/posts.php?source=editPost&pId=$thePostId'>Edit Post </a></li>";
                     }
                 }
 

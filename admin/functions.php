@@ -151,7 +151,9 @@ function isAdmin($username)
     confirmQuery($result);
 
     $row = mysqli_fetch_array($result);
-    if ($row['userRole'] == 'admin') {
+    if (empty($row['userRole'])) {
+        
+    }elseif ($row['userRole'] == 'admin') {
         return true;
     } else {
         return false;

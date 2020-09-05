@@ -52,19 +52,19 @@
 
                      <!-- First Blog Post -->
                      <h2>
-                         <a href="post.php?pId=<?php echo $postId; ?>"><?php echo $postTitle; ?></a>
+                         <a href="post/<?php echo $postId; ?>"><?php echo $postTitle; ?></a>
                      </h2>
                      <p class="lead">
-                         by <a href="authorPosts.php?author=<?php echo $postAuthor; ?>&pId=<?php echo $postId; ?>"><?php echo $postAuthor; ?></a>
+                         by <a href="../cms/authorPosts/<?php echo $postAuthor; ?>/<?php echo $postId; ?>"><?php echo $postAuthor; ?></a>
                      </p>
                      <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate; ?></p>
                      <hr>
                      <a href="post.php?pId=<?php echo $postId; ?>">
-                         <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
+                         <img class="img-responsive" src="/cms/images/<?php echo $postImage; ?>" alt="">
                      </a>
                      <hr>
                      <p><?php echo $postContent; ?></p>
-                     <a class="btn btn-primary" href="post.php?pId=<?php echo $postId; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                     <a class="btn btn-primary" href="../cms/post/<?php echo $postId; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
                      <hr>
              <?php
                     }

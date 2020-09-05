@@ -35,11 +35,11 @@
                          <a href="#"><?php echo $postTitle; ?></a>
                      </h2>
                      <p class="lead">
-                         by <a href="authorPosts.php?author=<?php echo $postAuthor; ?>&pId=<?php echo $postId; ?>"><?php echo $postAuthor; ?></a>
+                         by <a href="cms/authorPosts/<?php echo $postAuthor; ?>&pId=<?php echo $postId; ?>"><?php echo $postAuthor; ?></a>
                      </p>
                      <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate; ?></p>
                      <hr>
-                     <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
+                     <img class="img-responsive" src="/cms/images/<?php echo $postImage; ?>" alt="">
                      <hr>
                      <p><?php echo $postContent; ?></p>
                      <hr>
