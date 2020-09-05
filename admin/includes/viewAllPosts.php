@@ -119,7 +119,7 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<tr>";
             ?>
                 <td><input class='checkBoxes' id='selectAllBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $postId; ?>'></td>
-            <?php
+                <?php
 
                 echo "<td>$postId</td>";
                 // $query = "SELECT * FROM categories WHERE categoryId = $postCategoryId";
@@ -159,9 +159,23 @@ if (isset($_POST['checkBoxArray'])) {
 
 
                 echo "<td>$postStatus</td>";
-                echo "<td><a href='../post.php?pId={$postId}'>View</a></td>";
-                echo "<td><a href='posts.php?source=editPost&pId={$postId}'>Edit</a></td>";
-                echo "<td><a rel='$postId' href='javascript: void(0)' class='deleteLink'>Delete</a></td>";
+                echo "<td><a class='btn btn-primary' href='../post.php?pId={$postId}'>View</a></td>";
+                echo "<td><a class='btn btn-info' href='posts.php?source=editPost&pId={$postId}'>Edit</a></td>";
+                ?>
+                <form action="post">
+                    <input type="hidden" name="postId" value="<?php echo $postId; ?>">
+                    <?php
+                    echo '<td><input type="submit" name="delete" value="Delete" class="btn btn-danger"></td>';
+                    ?>
+                </form>
+
+
+            <?php
+
+               
+
+                //echo "<td><a rel='$postId' href='javascript: void(0)' class='deleteLink'>Delete</a></td>";
+
                 // echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete?'); \" href='posts.php?delete={$postId}'>Delete</a></td>";
                 echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to reset?'); \" href='posts.php?reset={$postId}'>$postViewsCount</a></td>";
                 echo "</tr>";
@@ -178,9 +192,9 @@ if (isset($_POST['checkBoxArray'])) {
 </form>
 <?php
 
-if (isset($_GET['delete'])) {
+if (isset($_POST['delete'])) {
 
-    $thePostId = escape($_GET['delete']);
+    $thePostId = escape($_POST['postId']);
 
     $query = "DELETE FROM posts WHERE postId = {$thePostId} ";
     $deleteQuery = mysqli_query($connection, $query);
@@ -199,10 +213,10 @@ if (isset($_GET['reset'])) {
     confirmQuery($resetQuery);
     header("Location: posts.php");
 }
-include("deleteModal.php");
+// include("deleteModal.php");
 ?>
 
-<script>
+<!-- <script>
     $(document).ready(function() {
         $(".deleteLink").on('click', function() {
             var id = $(this).attr("rel");
@@ -215,4 +229,4 @@ include("deleteModal.php");
 
 
     });
-</script>
+</script> -->
